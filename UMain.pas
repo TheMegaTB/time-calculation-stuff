@@ -14,11 +14,22 @@ type
     { Public declarations }
   end;
 
+  TTime = LongInt;
+
 var
   Form1: TForm1;
 
 implementation
 
 {$R *.dfm}
+
+
+//str.replace('yyyy', str(get_year(time)));
+
+
+function get_year(time: TTime): Integer;
+begin
+
+end;
 
 end.
