@@ -15,7 +15,7 @@ const
   DEFAULT_FORMAT = 'D.M.YYYY HH.MM.SS:mmmm';
 
 function str_to_time(str: String; delta: Boolean);
-function time_to_str(time: TTime; delta: Boolean);
+function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
 
 function get_year(time: TTime): Integer;
 
@@ -31,9 +31,14 @@ begin
   //DO NOT DELETE THIS STUPID DELPHI
 end;
 
-function time_to_str(time: TTime; delta: Boolean);
+function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
 begin
   //DO NOT DELETE THIS STUPID DELPHI
+end;
+
+function time_to_str(time: TTime; delta: Boolean): String; overload;
+begin
+  result:=time_to_str(time, delta, DEFAULT_FORMAT);
 end;
 
 end.
