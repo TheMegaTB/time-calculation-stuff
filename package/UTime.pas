@@ -12,7 +12,7 @@ const
   DAY = HOUR * 24;
   YEAR = DAY * 365;
   //TTime=0 => 0.0.0000 00:00:00:0000
-
+  DEFAULT_FORMAT = 'D.M.YYYY HH.MM.SS:mmmm';
 
 function str_to_time(str: String; delta: Boolean);
 function time_to_str(time: TTime; delta: Boolean);
