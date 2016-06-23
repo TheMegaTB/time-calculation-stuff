@@ -1,9 +1,6 @@
-unit UMain;
+unit UTime;
 
 interface
-
-var
-  x: Integer;
 
 implementation
 

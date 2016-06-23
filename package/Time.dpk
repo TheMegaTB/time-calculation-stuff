@@ -1,4 +1,4 @@
-package TimeCalculator;
+package Time;
 
 {$R *.res}
 {$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
@@ -31,6 +31,6 @@ requires
   rtl;
 
 contains
-  UMain in '..\UMain.pas';
+  UTime in 'UTime.pas';
 
 end.
