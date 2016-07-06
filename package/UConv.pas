@@ -26,7 +26,7 @@ implementation
   "DD.MM.YYYY hh:mm:ss", "DD.MM.YYYY", "hh:mm:ss", "DD.MM", "hh:mm".
   Other formats might work out, too, but are not intended.
   The semicolon or dot is needed to indentify the meaning of the numbers. }
-function str_to_time(str: String; DefaultYear: Integer; delta: Boolean): TTime;
+function str_to_time(str: String; DefaultDay, DefaultMonth, DefaultYear: Integer; delta: Boolean): TTime;
 var
   NumberStart: Integer;
   I, N: Integer;
@@ -63,40 +63,49 @@ begin
       end
       else
       begin
-        { Let's just pretend the information is there... }
-        if LastNumberWasDotted
-          then str[I]:= '.'
-          else str[I]:= ':';
-        Dec(I, 1);
+        if LastNumberWasDotted then
+        begin
+          SetLength(DottedNumbers, Length(DottedNumbers) + 1);
+          DottedNumbers[High(DottedNumbers)]:= N;
+        end
+        else 
+        begin
+          SetLength(ColonNumbers, Length(ColonNumbers) + 1);
+          ColonNumbers[High(ColonNumbers)]:= N;
+        end
       end;
     end;
     Inc(i);
   end; 
 
-  if Length(ColonNumbers) > 0 then
-    Day:= ColonNumbers[0]
-  else
-    Day:= 1;
-  if Length(ColonNumbers) > 1 then
-    Month:= ColonNumbers[1]
-  else
-    Month:= 1;
-  if Length(ColonNumbers) > 2 then
-    Year:= ColonNumbers[2]
-  else if Length(ColonNumbers) <> 0 then
-    Year:= DefaultYear
-  else 
-    Year:= 0; { If there is no single Date data, do not add a year! }
   if Length(DottedNumbers) > 0 then
-    Hour:= DottedNumbers[0]
+    Day:= DottedNumbers[0]
+  else if delta then
+    Day:= 0
+  else
+    Day:= DefaultDay; 
+  if Length(DottedNumbers) > 1 then
+    Month:= DottedNumbers[1]
+  else if delta then
+    Month:= 0
+  else 
+    Month:= DefaultMonth;
+  if Length(DottedNumbers) > 2 then
+    Year:= DottedNumbers[2]
+  else if delta then
+    Year:= 0
+  else 
+    Year:= DefaultYear;
+  if Length(ColonNumbers) > 0 then
+    Hour:= ColonNumbers[0]
   else 
     Hour:= 0;
-  if Length(DottedNumbers) > 1 then
-    Minute:= DottedNumbers[1]
+  if Length(ColonNumbers) > 1 then
+    Minute:= ColonNumbers[1]
   else 
     Minute:= 0;
-  if Length(DottedNumbers) > 2 then
-    Second:= DottedNumbers[2]
+  if Length(ColonNumbers) > 2 then
+    Second:= ColonNumbers[2]
   else 
     Second:= 0;
 
