@@ -8,11 +8,11 @@ type
   TTime = LongInt;
 
 const
-  SECOND = 1000;
-  MINUTE = SECOND * 60;
-  HOUR = MINUTE * 60;
-  DAY = HOUR * 24;
-  YEAR = DAY * 365;
+  SECOND: Int64 = 1000;
+  MINUTE: Int64 = 1000 * 60;
+  HOUR: Int64 = 1000 * 60 * 60;
+  DAY: Int64 = 1000 * 60 * 60 * 24;
+  YEAR: Int64 = 31536000000;//1000 * 60 * 60 * 24 * 365;
   //TTime=0 => 0.0.0000 00:00:00:0000
   FMT_DEFAULT = 'DD.MM.YYYY HH.MM.SS:mmmm';
   FMT_DAY = 'DD';
@@ -24,7 +24,7 @@ const
   FMT_SECOND = 'SS';
   FMT_MILLI = 'mmmm';
 
-function str_to_time(str: String; delta: Boolean);
+function str_to_time(str: String; delta: Boolean): TTime;
 function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
 
 function get_year(time: TTime): Integer;
@@ -36,7 +36,7 @@ begin
   time mod YEAR;
 end;
 
-function str_to_time(str: String; delta: Boolean);
+function str_to_time(str: String; delta: Boolean): TTime;
 begin
   //DO NOT DELETE THIS STUPID DELPHI
 end;
