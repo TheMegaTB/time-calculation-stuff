@@ -25,10 +25,9 @@ begin
   tmp_string := StringReplace(tmp_string, FMT_YEAR, IntToStr(get_year(time)), [rfReplaceAll]);
   tmp_string := StringReplace(tmp_string, FMT_SHORT_YEAR, IntToStr(get_short_year(time)), [rfReplaceAll]);
 
-  //tmp_string := StringReplace(tmp_string, FMT_HOUR, IntToStr(get_hour(time)), [rfReplaceAll]);
-  //tmp_string := StringReplace(tmp_string, FMT_MINUTE, IntToStr(get_minute(time)), [rfReplaceAll]);
-  //tmp_string := StringReplace(tmp_string, FMT_SECOND, IntToStr(get_second(time)), [rfReplaceAll]);
-  //tmp_string := StringReplace(tmp_string, FMT_MILLI, IntToStr(get_milli(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_HOUR, IntToStr(get_hour(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_MINUTE, IntToStr(get_minute(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_SECOND, IntToStr(get_second(time)), [rfReplaceAll]);
   Result := tmp_string;
 end;
 

@@ -3,7 +3,7 @@ unit UTime;
 interface
 
 type
-  TTime = LongInt;
+  TTime = Int64;
 
 const
   SECOND: Int64 = 1;
@@ -12,7 +12,7 @@ const
   DAY: Int64 = 60 * 60 * 24;
   YEAR: Int64 = 31536000;//60 * 60 * 24 * 365;
   //TTime=0 => 0.0.0000 00:00:00
-  FMT_DEFAULT = 'DD.MM YYYY hh.mm.ss';
+  FMT_DEFAULT = 'DD.MM YYYY hh:mm:ss';
   FMT_DAY = 'DD';
   FMT_MONTH = 'MM';
   FMT_YEAR = 'YYYY';
@@ -28,6 +28,8 @@ function get_month(time: TTime): Integer;
 function get_month_name(time: TTime): String;
 function get_day(time: TTime): Integer;
 function get_hour(time: TTime): Integer;
+function get_minute(time: TTime): Integer;
+function get_second(time: TTime): Integer;
 
 implementation
 
@@ -99,23 +101,18 @@ begin
 end;
 
 function get_hour(time: TTime): Integer;
-var
-  TimeOfYear: TTime;
-  I, TimeOfMonth: Integer;
 begin
-  TimeOfYear:= Time - get_year(Time) * YEAR;
-  TimeOfMonth:= TimeOfYear;
-  I:= 0;
-  for I:= 0 to 11 do
-  begin
-    Dec(TimeOfMonth, MONTH_LENGTHS[i] * HOUR);
-    if TimeOfMonth <= 0 then
-    begin
-      Inc(TimeOfMonth, MONTH_LENGTHS[i] * HOUR);
-      break
-    end;
-  end;
-  Result:= TimeOfMonth div DAY;
+  Result:=(time div HOUR) mod 24;
+end;
+
+function get_minute(time: TTime): Integer;
+begin
+  Result:=(time div MINUTE) mod 60;
+end;
+
+function get_second(time: TTime): Integer;
+begin
+  Result:=(time div SECOND) mod 60;
 end;
 
 end.

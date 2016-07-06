@@ -17,11 +17,9 @@ type
     { Public declarations }
   end;
 
-  TTime = LongInt;
-
 var
   Form1: TForm1;
-  i: Integer;
+  i: Int64;
 
 implementation
 
@@ -30,13 +28,14 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  Button1.Caption := UConv.time_to_str(60 * 60 * 24 * i, false);
+  Form1.Caption:=IntToStr(60 * 60 * 24 * 365 * i);
+  Button1.Caption := UConv.time_to_str(60 * 60 * 24 * 365 * i, false);
   inc(i);
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-  i:= 360;
+  i:= 2000;
 end;
 
 end.
