@@ -47,7 +47,7 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
 tmp_time: UTime.TTime;
 begin
-  tmp_time := str_to_time(Edit1.Text, 0, false);
+  tmp_time := str_to_time(Edit1.Text, 1, 1, 0, false);
   Panel6.Caption := time_to_str(tmp_time, false, Edit4.Text);
   Form1.Caption := IntToStr(tmp_time);
 end;
