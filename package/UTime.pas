@@ -96,6 +96,30 @@ begin
   Result:= TimeOfMonth div DAY;
 end;
 
+function get_short_year(time: TTime): Integer;
+begin
+  Result:= get_year(time) mod 100;
+end;
+
+function get_month_name(time: TTime): String;
+begin
+  case get_month(time) of
+    0: Result:= 'Jan';
+    1: Result:= 'Feb';
+    2: Result:= 'Mar';
+    3: Result:= 'Apr';
+    4: Result:= 'May';
+    5: Result:= 'Jun';
+    6: Result:= 'Jul';
+    7: Result:= 'Aug';
+    8: Result:= 'Sep';
+    9: Result:= 'Oct';
+    10: Result:= 'Nov';
+    11: Result:= 'Dec';
+    else Result:= 'Err';
+  end;
+end;
+
 function str_to_time(str: String; delta: Boolean);
 begin
   //DO NOT DELETE THIS STUPID DELPHI
