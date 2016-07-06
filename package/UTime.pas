@@ -23,6 +23,9 @@ const
   FMT_MINUTE = 'MM';
   FMT_SECOND = 'SS';
   FMT_MILLI = 'mmmm';
+  MONTH_LENGTHS: Array[0..11] of Integer = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30,
+31);
+
 
 function str_to_time(str: String; delta: Boolean);
 function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
@@ -33,7 +36,64 @@ implementation
 
 function get_year(time: TTime): Integer;
 begin
-  time mod YEAR;
+  Result:= time div YEAR;
+end;
+
+function get_day(time: TTime): Integer;
+var
+  TimeOfYear: TTime;
+  DayOfYear: Integer;
+  I: Integer;
+begin
+  TimeOfYear:= Time - get_year(time) * YEAR;
+  Result:= TimeOfYear div DAY;
+  for I:= 0 to 11 do
+  begin
+    Dec(Result, MONTH_LENGTHS[i]);
+    if Result <= 0 then
+    begin
+      Inc(Result, MONTH_LENGTHS[i]);
+      break;
+    end;
+  end;
+end;
+
+function get_month(time: TTime): Integer;
+var
+  TimeOfYear: TTime;
+  DayOfYear: Integer;
+  DayAcc: Integer;
+begin
+  TimeOfYear:= Time - get_year(time) * YEAR;
+  DayOfYear:= TimeOfYear div DAY;
+  DayAcc:= 0;
+  Result:= 0;
+  for Result:= 0 to 11 do
+  begin
+    Inc(DayAcc, MONTH_LENGTHS[i]);
+    if DayOfYear <= DayAcc then
+      break;
+  end;
+end;
+
+function get_hour(time: TTime): Integer;
+var
+  TimeOfYear: TTime;
+  I, TimeOfMonth: Integer;
+begin
+  TimeOfYear:= Time - get_year(Time) * YEAR;
+  TimeOfMonth:= TimeOfYear;
+  I:= 0;
+  for I:= 0 to 11 do
+  begin
+    Dec(TimeOfMonth, MONTH_LENGTHS[i] * HOUR);
+    if TimeOfMonth <= 0 then
+    begin
+      Inc(TimeOfMonth, MONTH_LENGTHS[i] * HOUR);
+      break
+    end;
+  end;
+  Result:= TimeOfMonth div DAY;
 end;
 
 function str_to_time(str: String; delta: Boolean);
