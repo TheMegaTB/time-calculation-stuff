@@ -1,11 +1,12 @@
 unit UConv;
 
-uses UTime, SysUtils;
-
 interface
+
+uses UTime, SysUtils, System.Character;
 
 function str_to_time(str: String; DefaultYear: Integer; delta: Boolean): TTime;
 function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
+function time_to_str(time: TTime; delta: Boolean): String; overload;
 
 const
   FMT_DEFAULT = 'DD.MM.YYYY hh:mm:ss';
@@ -29,20 +30,21 @@ function str_to_time(str: String; DefaultYear: Integer; delta: Boolean): TTime;
 var
   NumberStart: Integer;
   I, N: Integer;
-  DottedNumbers: Array of Integer;
+  ColonNumbers, DottedNumbers: Array of Integer;
   LastNumberWasDotted: Boolean;
 
   Day, Month, Year, Hour, Minute, Second: Integer;
 begin
   { So that the for loop will end with the *exclusive* end of the last number }
   str:= str + ' ';
-  SetLength(Numbers, 0);
+  SetLength(DottedNumbers, 0);
   NumberStart:= -1;
-  for I:= 1 to High(str) do
+  i:=1;
+  while I <= Length(str) do
   begin
-    if (NumberStart = -1) and (str[I].IsDigit) then
+    if (NumberStart = -1) and IsDigit(str[I]) then
       NumberStart:= I;
-    if (NumberStart <> -1) and (not str[I].IsDigit) then
+    if (NumberStart <> -1) and (not IsDigit(str[I])) then
     begin
       N:= StrToInt(Copy(str, NumberStart, I - NumberStart));
       NumberStart:= -1;
@@ -65,22 +67,23 @@ begin
         if LastNumberWasDotted
           then str[I]:= '.'
           else str[I]:= ':';
-        Dec(I);
+        Dec(I, 1);
       end;
     end;
+    Inc(i);
   end; 
 
   if Length(ColonNumbers) > 0 then
     Day:= ColonNumbers[0]
   else
-    Day:= 0;
+    Day:= 1;
   if Length(ColonNumbers) > 1 then
     Month:= ColonNumbers[1]
   else
-    Month:= 0;
+    Month:= 1;
   if Length(ColonNumbers) > 2 then
     Year:= ColonNumbers[2]
-  else if Length(ColonNumbers) != 0 then
+  else if Length(ColonNumbers) <> 0 then
     Year:= DefaultYear
   else 
     Year:= 0; { If there is no single Date data, do not add a year! }
