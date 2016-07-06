@@ -87,7 +87,7 @@ begin
   if Length(DottedNumbers) > 1 then
     Month:= DottedNumbers[1]
   else if delta then
-    Month:= 0
+    Month:= -1
   else 
     Month:= DefaultMonth;
   if Length(DottedNumbers) > 2 then
@@ -109,7 +109,7 @@ begin
   else 
     Second:= 0;
 
-  Result:= Day * UTime.DAY + UTime.MONTH_LENGTHS[Month] * UTime.DAY + Year * UTime.YEAR + Hour * UTime.HOUR + Minute * UTime.MINUTE + Second * UTime.SECOND;
+  Result:= Day * UTime.DAY + UTime.get_month_offset(Month) * UTime.DAY + Year * UTime.YEAR + Hour * UTime.HOUR + Minute * UTime.MINUTE + Second * UTime.SECOND;
 end;
 
 
