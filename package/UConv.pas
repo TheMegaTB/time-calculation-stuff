@@ -1,6 +1,6 @@
 unit UConv;
 
-interface
+interface
 
 uses UTime, SysUtils, System.Character;
 
@@ -18,7 +18,7 @@ const
   FMT_MINUTE = 'mm';
   FMT_SECOND = 'ss';
   FMT_MILLI = 'mmmm';
-
+ 
 
 implementation
 
@@ -39,7 +39,8 @@ begin
   str:= str + ' ';
   SetLength(DottedNumbers, 0);
   NumberStart:= -1;
-  for I:=0 to Length(str) do
+  i:=1;
+  while I <= Length(str) do
   begin
     if (NumberStart = -1) and IsDigit(str[I]) then
       NumberStart:= I;
@@ -67,44 +68,45 @@ begin
           SetLength(DottedNumbers, Length(DottedNumbers) + 1);
           DottedNumbers[High(DottedNumbers)]:= N;
         end
-        else
+        else 
         begin
           SetLength(ColonNumbers, Length(ColonNumbers) + 1);
           ColonNumbers[High(ColonNumbers)]:= N;
         end
       end;
     end;
-  end;
+    Inc(i);
+  end; 
 
   if Length(DottedNumbers) > 0 then
     Day:= DottedNumbers[0]
   else if delta then
     Day:= 0
   else
-    Day:= DefaultDay;
+    Day:= DefaultDay; 
   if Length(DottedNumbers) > 1 then
     Month:= DottedNumbers[1]
   else if delta then
     Month:= 0
-  else
+  else 
     Month:= DefaultMonth;
   if Length(DottedNumbers) > 2 then
     Year:= DottedNumbers[2]
   else if delta then
     Year:= 0
-  else
+  else 
     Year:= DefaultYear;
   if Length(ColonNumbers) > 0 then
     Hour:= ColonNumbers[0]
-  else
+  else 
     Hour:= 0;
   if Length(ColonNumbers) > 1 then
     Minute:= ColonNumbers[1]
-  else
+  else 
     Minute:= 0;
   if Length(ColonNumbers) > 2 then
     Second:= ColonNumbers[2]
-  else
+  else 
     Second:= 0;
 
   Result:= Day * UTime.DAY + UTime.MONTH_LENGTHS[Month] * UTime.DAY + Year * UTime.YEAR + Hour * UTime.HOUR + Minute * UTime.MINUTE + Second * UTime.SECOND;
