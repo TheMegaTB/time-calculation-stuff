@@ -117,8 +117,16 @@ function time_to_str(time: TTime; delta: Boolean; format: String): String; overl
 var
   tmp_string: String;
 begin
-  tmp_string := StringReplace(format, FMT_DAY, IntToStr(get_day(time)), [rfReplaceAll]);
-  tmp_string := StringReplace(tmp_string, FMT_MONTH, get_month_name(time), [rfReplaceAll]);
+  tmp_string := format;
+  if delta then
+  begin
+    tmp_string := StringReplace(tmp_string, FMT_DAY, IntToStr(get_day(time)), [rfReplaceAll]);
+    tmp_string := StringReplace(tmp_string, FMT_MONTH, get_month_name(time), [rfReplaceAll]);
+  end
+  else
+  begin
+    tmp_string := StringReplace(tmp_string, FMT_DAY, IntToStr(get_days_in_year(time)), [rfReplaceAll]);
+  end;
 
   tmp_string := StringReplace(tmp_string, FMT_YEAR, IntToStr(get_year(time)), [rfReplaceAll]);
   tmp_string := StringReplace(tmp_string, FMT_SHORT_YEAR, IntToStr(get_short_year(time)), [rfReplaceAll]);

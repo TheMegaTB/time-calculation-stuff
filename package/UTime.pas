@@ -26,6 +26,7 @@ function get_year(time: TTime): Integer;
 function get_short_year(time: TTime): Integer;
 function get_month(time: TTime): Integer;
 function get_month_name(time: TTime): String;
+function get_days_in_year(time: TTime): Integer;
 function get_day(time: TTime): Integer;
 function get_hour(time: TTime): Integer;
 function get_minute(time: TTime): Integer;
@@ -79,6 +80,11 @@ begin
     11: Result:= 'Dec';
     else Result:= 'Err';
   end;
+end;
+
+function get_days_in_year(time: TTime): Integer;
+begin
+  Result:=(time div DAY) mod 365;
 end;
 
 function get_day(time: TTime): Integer;

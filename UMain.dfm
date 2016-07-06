@@ -13,7 +13,7 @@ object Form1: TForm1
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object Edit1: TEdit
+  object Input1: TEdit
     Left = 200
     Top = 104
     Width = 121
@@ -21,7 +21,7 @@ object Form1: TForm1
     TabOrder = 0
     Text = '1.1.2016'
   end
-  object Edit2: TEdit
+  object Input2: TEdit
     Left = 344
     Top = 104
     Width = 121
@@ -29,7 +29,7 @@ object Form1: TForm1
     TabOrder = 1
     Text = '0:0:0'
   end
-  object Edit3: TEdit
+  object Input3: TEdit
     Left = 488
     Top = 104
     Width = 121
@@ -37,7 +37,7 @@ object Form1: TForm1
     TabOrder = 2
     Text = '1.1.2017'
   end
-  object Edit4: TEdit
+  object Format1: TEdit
     Left = 200
     Top = 184
     Width = 121
@@ -45,7 +45,7 @@ object Form1: TForm1
     TabOrder = 3
     Text = 'DD.MM YYYY hh:mm:ss'
   end
-  object Edit5: TEdit
+  object Format2: TEdit
     Left = 344
     Top = 184
     Width = 121
@@ -53,7 +53,7 @@ object Form1: TForm1
     TabOrder = 4
     Text = 'DD hh:mm:ss'
   end
-  object Edit6: TEdit
+  object Format3: TEdit
     Left = 488
     Top = 184
     Width = 121
@@ -117,6 +117,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Calculate'
     TabOrder = 12
+    OnClick = Button2Click
   end
   object Button3: TButton
     Left = 488
@@ -126,21 +127,21 @@ object Form1: TForm1
     Caption = 'Calculate'
     TabOrder = 13
   end
-  object Panel6: TPanel
+  object Output1: TPanel
     Left = 200
     Top = 224
     Width = 121
     Height = 25
     TabOrder = 14
   end
-  object Panel7: TPanel
+  object Output2: TPanel
     Left = 344
     Top = 224
     Width = 121
     Height = 25
     TabOrder = 15
   end
-  object Panel8: TPanel
+  object Output3: TPanel
     Left = 488
     Top = 224
     Width = 121

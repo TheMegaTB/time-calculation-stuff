@@ -8,12 +8,12 @@ uses
 
 type
   TForm1 = class(TForm)
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
-    Edit4: TEdit;
-    Edit5: TEdit;
-    Edit6: TEdit;
+    Input1: TEdit;
+    Input2: TEdit;
+    Input3: TEdit;
+    Format1: TEdit;
+    Format2: TEdit;
+    Format3: TEdit;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -22,11 +22,12 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    Panel6: TPanel;
-    Panel7: TPanel;
-    Panel8: TPanel;
+    Output1: TPanel;
+    Output2: TPanel;
+    Output3: TPanel;
     Panel9: TPanel;
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,9 +48,18 @@ procedure TForm1.Button1Click(Sender: TObject);
 var
 tmp_time: UTime.TTime;
 begin
-  tmp_time := str_to_time(Edit1.Text, 1, 1, 0, false);
-  Panel6.Caption := time_to_str(tmp_time, false, Edit4.Text);
+  tmp_time := str_to_time(Input1.Text, 1, 1, 0, false);
+  Output1.Caption := time_to_str(tmp_time, false, Format1.Text);
   Form1.Caption := IntToStr(tmp_time);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+var
+  t1, t2: TTime;
+begin
+  t1:=str_to_time(Input1.Text, 1, 1, 0, false);
+  t2:=str_to_time(Input3.Text, 1, 1, 0, false);
+  Output2.Caption:=time_to_str(t2-t1, false, Format2.Text);
 end;
 
 end.
