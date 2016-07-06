@@ -109,7 +109,7 @@ begin
   else 
     Second:= 0;
 
-  Result:= Day * UTime.DAY + UTime.get_month_offset(Month) * UTime.DAY + Year * UTime.YEAR + Hour * UTime.HOUR + Minute * UTime.MINUTE + Second * UTime.SECOND;
+  Result:= Day * UTime.DAY + UTime.get_month_offset(Month - 1) * UTime.DAY + Year * UTime.YEAR + Hour * UTime.HOUR + Minute * UTime.MINUTE + Second * UTime.SECOND;
 end;
 
 

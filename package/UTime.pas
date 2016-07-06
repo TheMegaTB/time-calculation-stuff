@@ -63,7 +63,7 @@ var
   I: Integer; 
 begin
   Result:= 0;
-  for I:= 0 to Month - 2 do
+  for I:= 0 to Month - 1 do
     Inc(Result, MONTH_LENGTHS[I]);
 end;
 
