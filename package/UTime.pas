@@ -6,21 +6,20 @@ type
   TTime = LongInt;
 
 const
-  SECOND: Int64 = 1000;
-  MINUTE: Int64 = 1000 * 60;
-  HOUR: Int64 = 1000 * 60 * 60;
-  DAY: Int64 = 1000 * 60 * 60 * 24;
-  YEAR: Int64 = 31536000000;//1000 * 60 * 60 * 24 * 365;
-  //TTime=0 => 0.0.0000 00:00:00:0000
-  FMT_DEFAULT = 'DD.MM.YYYY HH.MM.SS:mmmm';
+  SECOND: Int64 = 1;
+  MINUTE: Int64 = 60;
+  HOUR: Int64 = 60 * 60;
+  DAY: Int64 = 60 * 60 * 24;
+  YEAR: Int64 = 31536000;//60 * 60 * 24 * 365;
+  //TTime=0 => 0.0.0000 00:00:00
+  FMT_DEFAULT = 'DD.MM YYYY hh.mm.ss';
   FMT_DAY = 'DD';
   FMT_MONTH = 'MM';
   FMT_YEAR = 'YYYY';
   FMT_SHORT_YEAR = 'YY';
-  FMT_HOUR = 'HH';
-  FMT_MINUTE = 'MM';
-  FMT_SECOND = 'SS';
-  FMT_MILLI = 'mmmm';
+  FMT_HOUR = 'hh';
+  FMT_MINUTE = 'mm';
+  FMT_SECOND = 'ss';
   MONTH_LENGTHS: Array[0..11] of Integer = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 
 function get_year(time: TTime): Integer;
@@ -55,7 +54,7 @@ begin
   Result:= 0;
   for Result:= 0 to 11 do
   begin
-    Inc(DayAcc, MONTH_LENGTHS[i]);
+    Inc(DayAcc, MONTH_LENGTHS[Result]);
     if DayOfYear <= DayAcc then
       break;
   end;
