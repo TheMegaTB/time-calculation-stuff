@@ -79,6 +79,8 @@
             <Form>Form1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="package\UTime.pas"/>
+        <DCCReference Include="package\UConv.pas"/>
         <None Include="TimeCalculator.dpr"/>
         <None Include="package\Time.dpk"/>
         <BuildConfiguration Include="Release">

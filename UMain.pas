@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, UTime;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, UConv;
 
 type
   TForm1 = class(TForm)
@@ -28,7 +28,7 @@ implementation
 
 procedure TForm1.Button1Click(Sender: TObject);
 begin
-  Button1.Caption := UTime.time_to_str();
+  Button1.Caption := UConv.time_to_str(100000, false);
 end;
 
 end.
