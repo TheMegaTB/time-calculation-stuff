@@ -28,6 +28,7 @@ type
     Panel9: TPanel;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,12 +47,11 @@ uses UTime;
 
 procedure TForm1.Button1Click(Sender: TObject);
 var
-tmp_time: UTime.TTime;
-now: TDateTime;
+  t2, dt: TTime;
 begin
-  tmp_time := str_to_time(Input1.Text, false);
-  Output1.Caption := time_to_str(tmp_time, false, Format1.Text);
-  Form1.Caption := IntToStr(tmp_time);
+  t2:=str_to_time(Input3.Text, false);
+  dt:=str_to_time(Input2.Text, true);
+  Output1.Caption:=time_to_str(t2-dt, false, Format1.Text);
 end;
 
 procedure TForm1.Button2Click(Sender: TObject);
@@ -61,6 +61,15 @@ begin
   t1:=str_to_time(Input1.Text, false);
   t2:=str_to_time(Input3.Text, false);
   Output2.Caption:=time_to_str(t2-t1, false, Format2.Text);
+end;
+
+procedure TForm1.Button3Click(Sender: TObject);
+var
+  t1, dt: TTime;
+begin
+  t1:=str_to_time(Input1.Text, false);
+  dt:=str_to_time(Input2.Text, true);
+  Output3.Caption:=time_to_str(t1+dt, false, Format3.Text);
 end;
 
 end.

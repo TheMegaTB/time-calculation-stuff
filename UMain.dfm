@@ -126,6 +126,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'Calculate'
     TabOrder = 13
+    OnClick = Button3Click
   end
   object Output1: TPanel
     Left = 168

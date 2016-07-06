@@ -85,18 +85,32 @@ begin
     Day:= 0
   else
     Day:= DefaultDay; 
-  if Length(DottedNumbers) > 1 then
-    Month:= DottedNumbers[1]
-  else if delta then
-    Month:= -1
-  else 
-    Month:= DefaultMonth;
-  if Length(DottedNumbers) > 2 then
+
+  if (Length(DottedNumbers) > 2) and (not delta) then
     Year:= DottedNumbers[2]
   else if delta then
     Year:= 0
   else 
     Year:= DefaultYear;
+
+  if Length(DottedNumbers) > 1 then
+  begin
+    if delta then
+    begin
+      Year:= DottedNumbers[1];
+      Month:= -1;
+    end
+    else
+      Month:= DottedNumbers[1];
+  end
+  else if delta then
+    Month:= -1
+  else
+    Month:= DefaultMonth;
+
+
+
+
   if Length(ColonNumbers) > 0 then
     Hour:= ColonNumbers[0]
   else 
