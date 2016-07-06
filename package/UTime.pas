@@ -12,14 +12,6 @@ const
   DAY: Int64 = 60 * 60 * 24;
   YEAR: Int64 = 31536000;//60 * 60 * 24 * 365;
   //TTime=0 => 0.0.0000 00:00:00
-  FMT_DEFAULT = 'DD.MM YYYY hh:mm:ss';
-  FMT_DAY = 'DD';
-  FMT_MONTH = 'MM';
-  FMT_YEAR = 'YYYY';
-  FMT_SHORT_YEAR = 'YY';
-  FMT_HOUR = 'hh';
-  FMT_MINUTE = 'mm';
-  FMT_SECOND = 'ss';
   MONTH_LENGTHS: Array[0..11] of Integer = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 
 function get_year(time: TTime): Integer;
@@ -30,6 +22,9 @@ function get_day(time: TTime): Integer;
 function get_hour(time: TTime): Integer;
 function get_minute(time: TTime): Integer;
 function get_second(time: TTime): Integer;
+{ Returns the offset of the month relative to a year in days }
+function get_month_offset(Month: Integer): Integer;
+
 
 implementation
 
@@ -60,6 +55,15 @@ begin
     if DayOfYear <= DayAcc then
       break;
   end;
+end;
+
+function get_month_offset(Month: Integer): Integer;
+var
+  I: Integer; 
+begin
+  Result:= 0;
+  for I:= 0 to Month do 
+    Inc(Result, MONTH_LENGTHS[I]);
 end;
 
 function get_month_name(time: TTime): String;
