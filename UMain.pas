@@ -47,8 +47,9 @@ uses UTime;
 procedure TForm1.Button1Click(Sender: TObject);
 var
 tmp_time: UTime.TTime;
+now: TDateTime;
 begin
-  tmp_time := str_to_time(Input1.Text, 1, 1, 0, false);
+  tmp_time := str_to_time(Input1.Text, false);
   Output1.Caption := time_to_str(tmp_time, false, Format1.Text);
   Form1.Caption := IntToStr(tmp_time);
 end;
@@ -57,8 +58,8 @@ procedure TForm1.Button2Click(Sender: TObject);
 var
   t1, t2: TTime;
 begin
-  t1:=str_to_time(Input1.Text, 1, 1, 0, false);
-  t2:=str_to_time(Input3.Text, 1, 1, 0, false);
+  t1:=str_to_time(Input1.Text, false);
+  t2:=str_to_time(Input3.Text, false);
   Output2.Caption:=time_to_str(t2-t1, false, Format2.Text);
 end;
 

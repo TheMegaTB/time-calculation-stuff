@@ -2,9 +2,10 @@ unit UConv;
 
 interface
 
-uses UTime, SysUtils, System.Character;
+uses UTime, SysUtils, System.Character, DateUtils;
 
-function str_to_time(str: String; DefaultDay, DefaultMonth, DefaultYear: Integer; delta: Boolean): TTime;
+function str_to_time(str: String; DefaultDay, DefaultMonth, DefaultYear: Integer; delta: Boolean): TTime; overload;
+function str_to_time(str: String; delta: Boolean): TTime; overload;
 function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
 function time_to_str(time: TTime; delta: Boolean): String; overload;
 
@@ -26,7 +27,7 @@ implementation
   "DD.MM.YYYY hh:mm:ss", "DD.MM.YYYY", "hh:mm:ss", "DD.MM", "hh:mm".
   Other formats might work out, too, but are not intended.
   The semicolon or dot is needed to indentify the meaning of the numbers. }
-function str_to_time(str: String; DefaultDay, DefaultMonth, DefaultYear: Integer; delta: Boolean): TTime;
+function str_to_time(str: String; DefaultDay, DefaultMonth, DefaultYear: Integer; delta: Boolean): TTime; overload;
 var
   NumberStart: Integer;
   I, N: Integer;
@@ -110,6 +111,14 @@ begin
     Second:= 0;
 
   Result:= Day * UTime.DAY + UTime.get_month_offset(Month - 1) * UTime.DAY + Year * UTime.YEAR + Hour * UTime.HOUR + Minute * UTime.MINUTE + Second * UTime.SECOND;
+end;
+
+function str_to_time(str: String; delta: Boolean): TTime; overload;
+var
+  now: TDateTime;
+begin
+  now:=Date();
+  Result:=str_to_time(str, DayOf(now), MonthOf(now), YearOf(now), delta);
 end;
 
 
