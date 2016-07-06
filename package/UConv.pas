@@ -1,7 +1,6 @@
-
 unit UConv;
 
-uses UTime;
+uses UTime, SysUtils;
 
 interface
 
@@ -9,14 +8,14 @@ function str_to_time(str: String; DefaultYear: Integer; delta: Boolean): TTime;
 function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
 
 const
-  FMT_DEFAULT = 'DD.MM.YYYY HH:MM:SS:mmmm';
+  FMT_DEFAULT = 'DD.MM.YYYY hh:mm:ss';
   FMT_DAY = 'DD';
   FMT_MONTH = 'MM';
   FMT_YEAR = 'YYYY';
   FMT_SHORT_YEAR = 'YY';
-  FMT_HOUR = 'HH';
-  FMT_MINUTE = 'MM';
-  FMT_SECOND = 'SS';
+  FMT_HOUR = 'hh';
+  FMT_MINUTE = 'mm';
+  FMT_SECOND = 'ss';
   FMT_MILLI = 'mmmm';
  
 
@@ -101,23 +100,26 @@ begin
   Result:= Day * DAY + MONTH_LENGTHS[Month] * DAY + Year * YEAR + Hour * HOUR + Minute * MINUTE + Second * SECOND; 
 end;
 
+
 function time_to_str(time: TTime; delta: Boolean; format: String): String; overload;
+var
+  tmp_string: String;
 begin
-  StringReplace(format, FMT_DAY, get_day(time));
-  StringReplace(format, FMT_MONTH, get_month_name(time));
+  tmp_string := StringReplace(format, FMT_DAY, IntToStr(get_day(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_MONTH, get_month_name(time), [rfReplaceAll]);
 
-  StringReplace(format, FMT_YEAR, get_year(time));
-  StringReplace(format, FMT_SHORT_YEAR, get_short_year(time));
+  tmp_string := StringReplace(tmp_string, FMT_YEAR, IntToStr(get_year(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_SHORT_YEAR, IntToStr(get_short_year(time)), [rfReplaceAll]);
 
-  StringReplace(format, FMT_HOUR, get_hour(time));
-  StringReplace(format, FMT_MINUTE, get_minute(time));
-  StringReplace(format, FMT_SECOND, get_second(time));
-  StringReplace(format, FMT_MILLI, get_milli(time));
+  tmp_string := StringReplace(tmp_string, FMT_HOUR, IntToStr(get_hour(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_MINUTE, IntToStr(get_minute(time)), [rfReplaceAll]);
+  tmp_string := StringReplace(tmp_string, FMT_SECOND, IntToStr(get_second(time)), [rfReplaceAll]);
+  Result := tmp_string;
 end;
 
 function time_to_str(time: TTime; delta: Boolean): String; overload;
 begin
-  result:=time_to_str(time, delta, FMT_DEFAULT);
+  result := time_to_str(time, delta, FMT_DEFAULT);
 end;
 
 end.

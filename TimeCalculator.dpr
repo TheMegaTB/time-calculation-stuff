@@ -2,7 +2,9 @@ program TimeCalculator;
 
 uses
   Vcl.Forms,
-  UMain in 'UMain.pas' {Form1};
+  UMain in 'UMain.pas' {Form1},
+  UTime in 'package\UTime.pas',
+  UConv in 'package\UConv.pas';
 
 {$R *.res}
 
